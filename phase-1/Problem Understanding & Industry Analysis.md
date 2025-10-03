@@ -123,25 +123,3 @@ This section outlines the primary workflow for managing a training program using
     *   After the course is delivered, the Instructor or L&D Administrator updates the `Enrollment Status` for each participant (e.g., from 'Registered' to 'Completed', 'Withdrawn', or 'No Show').
 9.  **Skill Acquisition (Optional):** If a participant `Completed` the course, a `Skill Acquisition` record may be created, linking the participant to the `Recommended Skill` taught by the course.
 10. **Reporting:** L&D and Management regularly review `Reports` and `Dashboards` to analyze course popularity, completion rates, and overall training impact.
-
-**Visual Representation (Flowchart Description - You would generate an image for this):**
-
-```mermaid
-graph TD
-    A[L&D Admin: Define Course] --> B(L&D Admin: Create Course Offering);
-    B --> C{Course Offering Status: Open};
-    C -- No --> D(Wait for Open Status);
-    C -- Yes --> E[Participant: Browse & Enroll / L&D Admin: Enroll Participant];
-    E --> F[Create Enrollment Record];
-    F --> G{Capacity Check};
-    G -- Exceeds Max Capacity --> H[Prevent Enrollment & Notify Full Status];
-    G -- Within Capacity --> I[Automated Email: Enrollment Confirmation];
-    I --> J[Course Offering Status: Update Current Enrollments];
-    J --> K{Time to Send Reminder?};
-    K -- Yes --> L[Automated Email: Course Reminder];
-    L --> M{Course Offering Start Time?};
-    M -- Yes --> N[Course Offering Status: In Progress];
-    N --> O{Course Offering End Time?};
-    O -- Yes --> P[L&D Admin/Instructor: Update Enrollment Status (Completed/No Show)];
-    P --> Q(Optional: Create Skill Acquisition Record);
-    Q --> R[L&D/Management: Review Reports & Dashboards];
