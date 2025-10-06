@@ -22,8 +22,3 @@ Enterprise training management solution on Salesforce Lightning Platform.
 - 50% fewer no-shows
 - $17,500 annual savings
 
-## Installation
-```bash
-git clone https://github.com/[username]/Salesforce-Training-Management-System.git
-sf org login web --alias TrainingOrg
-sf project deploy start --source-dir force-app
