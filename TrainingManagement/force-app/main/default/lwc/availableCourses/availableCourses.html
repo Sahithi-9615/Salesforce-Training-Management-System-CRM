@@ -1,0 +1,74 @@
+<template>
+    <lightning-card title="Available Course Offerings" icon-name="standard:event">
+        
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+
+        <!-- Error Message -->
+        <template if:true={error}>
+            <div class="slds-m-around_medium">
+                <p class="slds-text-color_error">{error}</p>
+            </div>
+        </template>
+
+        <!-- Course Offerings List -->
+        <template if:true={courseOfferings}>
+            <template if:false={hasOfferings}>
+                <div class="slds-m-around_medium">
+                    <p>No course offerings available at this time.</p>
+                </div>
+            </template>
+
+            <template if:true={hasOfferings}>
+                <div class="slds-m-around_medium">
+                    <template for:each={courseOfferings} for:item="offering">
+                        <div key={offering.Id} class="slds-box slds-m-bottom_small">
+                            
+                            <!-- Course Name -->
+                            <h3 class="slds-text-heading_small">
+                                {offering.Course__r.Name}
+                            </h3>
+                            
+                            <!-- Course Details -->
+                            <div class="slds-grid slds-gutters slds-m-top_small">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <p><strong>Start Date:</strong> {offering.Start_Date__c}</p>
+                                    <p><strong>Location:</strong> {offering.Location__c}</p>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <p><strong>Duration:</strong> {offering.Course__r.Duration_Hours__c} hours</p>
+                                    <p><strong>Instructor:</strong> {offering.Instructor__r.Name}</p>
+                                </div>
+                            </div>
+
+                            <!-- Capacity Bar -->
+                            <div class="slds-m-top_small">
+                                <p><strong>Available Seats:</strong> {offering.Available_Seats__c} / {offering.Capacity__c}</p>
+                                <lightning-progress-bar 
+                                    value={offering.capacityPercentage} 
+                                    variant={offering.capacityVariant}>
+                                </lightning-progress-bar>
+                            </div>
+
+                            <!-- Enroll Button -->
+                            <div class="slds-m-top_small">
+                                <lightning-button 
+                                    label="Enroll Now" 
+                                    variant="brand"
+                                    onclick={handleEnroll}
+                                    data-id={offering.Id}
+                                    disabled={offering.isFull}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+
+    </lightning-card>
+</template>
+
+

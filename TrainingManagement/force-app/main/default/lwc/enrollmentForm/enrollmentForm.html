@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="Quick Enrollment" icon-name="standard:form">
+        
+        <div class="slds-m-around_medium">
+            
+            <!-- Participant Lookup -->
+            <lightning-input-field
+                field-name="Participant__c"
+                value={participantId}
+                onchange={handleParticipantChange}>
+            </lightning-input-field>
+
+            <!-- Course Offering Lookup -->
+            <lightning-input-field
+                field-name="Course_Offering__c"
+                value={courseOfferingId}
+                onchange={handleCourseOfferingChange}>
+            </lightning-input-field>
+
+            <!-- Enrollment Date -->
+            <lightning-input
+                label="Enrollment Date"
+                type="date"
+                value={enrollmentDate}
+                onchange={handleDateChange}
+                required>
+            </lightning-input>
+
+            <!-- Status Picklist -->
+            <lightning-combobox
+                label="Status"
+                value={status}
+                options={statusOptions}
+                onchange={handleStatusChange}
+                required>
+            </lightning-combobox>
+
+            <!-- Buttons -->
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    label="Cancel"
+                    onclick={handleCancel}
+                    class="slds-m-right_x-small">
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="Enroll"
+                    onclick={handleEnroll}
+                    disabled={isEnrollDisabled}>
+                </lightning-button>
+            </div>
+
+        </div>
+
+    </lightning-card>
+</template>

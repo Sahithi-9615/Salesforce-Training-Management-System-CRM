@@ -1,0 +1,64 @@
+<template>
+    <lightning-card title="My Enrollments" icon-name="standard:registration">
+        
+        <!-- Loading -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+
+        <!-- Error -->
+        <template if:true={error}>
+            <div class="slds-m-around_medium">
+                <p class="slds-text-color_error">{error}</p>
+            </div>
+        </template>
+
+        <!-- Enrollments Table -->
+        <template if:true={enrollments}>
+            <template if:false={hasEnrollments}>
+                <div class="slds-m-around_medium">
+                    <p>You have no enrollments yet.</p>
+                </div>
+            </template>
+
+            <template if:true={hasEnrollments}>
+                <div class="slds-m-around_medium">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Certificate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={enrollments} for:item="enrollment">
+                                <tr key={enrollment.Id}>
+                                    <td>{enrollment.Course_Offering__r.Course__r.Name}</td>
+                                    <td>{enrollment.Course_Offering__r.Start_Date__c}</td>
+                                    <td>{enrollment.Course_Offering__r.Location__c}</td>
+                                    <td>
+                                        <lightning-badge 
+                                            label={enrollment.Status__c}
+                                            class={enrollment.statusClass}>
+                                        </lightning-badge>
+                                    </td>
+                                    <td>
+                                        <lightning-icon 
+                                            icon-name={enrollment.certificateIcon}
+                                            size="small"
+                                            alternative-text={enrollment.certificateText}>
+                                        </lightning-icon>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+        </template>
+
+    </lightning-card>
+</template>
